@@ -41,7 +41,43 @@ h1 {
 }
 
 /* ----Tatyanna's CSS - Start */
+body h1{
+  color: black;
+  text-shadow: rgba(67, 67, 65, 0.789) 1px 2px;
+  letter-spacing: 2px;
+  background-color: rgb(240, 240, 238);
+  padding: 1em;
+  margin-top: 0;
+}
+
 .update-score{
   display: flex;
   flex-flow: wrap;
+}
+
+.team1>section input, .team2>section input{
+    margin-left: .5rem;
+  }
+
+@media(max-width: 600px){
+  .score-area{
+    display: flex;
+    align-items: center;
+  }
+
+  .score-area p{
+    display: flex;
+    justify-content: center;
+  }
+
+  .team1 section:nth-of-type(2n), .team2 section:nth-of-type(2n){
+    display: flex;
+    text-align: center;
+    margin-right: 0;
+  }
+  
+  .team1 section:nth-of-type(2n) button, .team2 section:nth-of-type(2n) button{
+    margin: .5rem;
+    padding: .5vh;
+  }
 }

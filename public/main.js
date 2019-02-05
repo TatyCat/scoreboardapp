@@ -5,26 +5,27 @@
 let score1 = 0
 let score2 = 0
 
-let updateScore1Add = () =>{
+const updateScore1Add = () =>{
   score1++
+  getRandomColor()
   document.querySelector(".team1Score").textContent = score1 
 }
 
-let updateScore2Add = () =>{
+const updateScore2Add = () =>{
   score2++
+  getRandomColor()
   document.querySelector(".team2Score").textContent = score2 
 }
 
-let updateScore1Sub = () =>{
+const updateScore1Sub = () =>{
   score1--
   document.querySelector(".team1Score").textContent = score1 
 }
 
-let updateScore2Sub = () =>{
+const updateScore2Sub = () =>{
   score2--
   document.querySelector(".team2Score").textContent = score2 
 }
-
 
 // Select the class for both scores
 // Update the score to reflect the new global score
@@ -58,3 +59,12 @@ document.querySelector(".team2 button").addEventListener('click', changeTeamName
 
 
 
+// CHANGE BACKGROUND UPON SCORE INCREASE CLICK-----------------------------
+getRandomColor = () => {
+  var letters = '0123456789ABCDEF'
+  var color = '#'
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)]
+  }
+  document.body.style.backgroundColor = color;
+}
