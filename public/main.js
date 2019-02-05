@@ -2,28 +2,57 @@
 
 // SCORE-----------------------------
 // set a starting score
+// add or subtract score if less than 21 or greater than 0
+// change background color for every score increase
+// if 21, let user know they won
+
 let score1 = 0
 let score2 = 0
 
 const updateScore1Add = () =>{
-  score1++
-  getRandomColor()
-  document.querySelector(".team1Score").textContent = score1 
+  if (score1<= 21){
+    score1++
+    getRandomColor()
+    document.querySelector(".team1Score").textContent = score1 
+
+    if (score1 === 21){
+      document.querySelector('.team1Score').classList.add("winningTeam")
+      document.querySelector('.team1 h2').textContent = `${document.querySelector('.team1 h2').textContent} YOU WIN!!!!`
+      document.querySelector('.team1 h2').classList.add("winningTeam")
+      disableButtonsReset()
+    } 
+  }
 }
 
 const updateScore2Add = () =>{
-  score2++
-  getRandomColor()
-  document.querySelector(".team2Score").textContent = score2 
+  if (score2<= 21){
+    score2++
+    getRandomColor()
+    document.querySelector(".team2Score").textContent = score2
+    if (score2 === 21){
+      document.querySelector('.team2Score').classList.add("winningTeam")
+      document.querySelector('.team2 h2').textContent = `${document.querySelector('.team2 h2').textContent} YOU WIN!!!!`
+      document.querySelector('.team2 h2').classList.add("winningTeam")
+      disableButtonsReset()
+    }
+  }
 }
 
 const updateScore1Sub = () =>{
-  score1--
+  if (score1 > 0){
+    score1--
+  }else {
+    alert("Score is already at zero.")
+  }
   document.querySelector(".team1Score").textContent = score1 
 }
 
 const updateScore2Sub = () =>{
+  if (score1 > 0){
   score2--
+  }else {
+    alert("Score is already at zero.")
+  }
   document.querySelector(".team2Score").textContent = score2 
 }
 
@@ -57,14 +86,19 @@ document.querySelector(".update-team-1-name").addEventListener('click', changeTe
 
 document.querySelector(".team2 button").addEventListener('click', changeTeamName2);
 
-
+// DISABLE BUTTON-----------------------------
+const disableButtonsReset = () => {
+  //
+}
 
 // CHANGE BACKGROUND UPON SCORE INCREASE CLICK-----------------------------
-getRandomColor = () => {
-  var letters = '0123456789ABCDEF'
-  var color = '#'
-  for (var i = 0; i < 6; i++) {
+const getRandomColor = () => {
+  let letters = '0123456789ABCDEF'
+  let color = '#'
+  for (let i = 0; i < 6; i++) {
     color += letters[Math.floor(Math.random() * 16)]
   }
   document.body.style.backgroundColor = color;
 }
+
+

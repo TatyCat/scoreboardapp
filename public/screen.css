@@ -59,6 +59,21 @@ body h1{
     margin-left: .5rem;
   }
 
+
+@keyframes winningTeam {
+  from {color: red;}
+  to {color: whitesmoke;}
+}
+.winningTeam{
+  animation-name: winningTeam;
+  animation-duration: 0.2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-play-state: running;
+}
+
+
 @media(max-width: 600px){
   .score-area{
     display: flex;
