@@ -8,17 +8,21 @@
 
 let score1 = 0
 let score2 = 0
+let team1ScoreText = document.querySelector(".team1Score")
+let team2ScoreText = document.querySelector(".team2Score")
+let team1TeamNameText = document.querySelector('.team1 h2')
+let team2TeamNameText = document.querySelector('.team2 h2')
 
 const updateScore1Add = () =>{
   if (score1<= 21){
     score1++
     getRandomColor()
-    document.querySelector(".team1Score").textContent = score1 
+    team1ScoreText.textContent = score1 
 
     if (score1 === 21){
-      document.querySelector('.team1Score').classList.add("winningTeam")
-      document.querySelector('.team1 h2').textContent = `${document.querySelector('.team1 h2').textContent} YOU WIN!!!!`
-      document.querySelector('.team1 h2').classList.add("winningTeam")
+      team1ScoreText.classList.add("winningTeam")
+      team1TeamNameText.textContent = `${team1TeamNameText.textContent} YOU WIN!!!!`
+      team1TeamNameText.classList.add("winningTeam")
       disableButtonsReset()
     } 
   }
@@ -28,10 +32,10 @@ const updateScore2Add = () =>{
   if (score2<= 21){
     score2++
     getRandomColor()
-    document.querySelector(".team2Score").textContent = score2
+    team2ScoreText.textContent = score2
     if (score2 === 21){
-      document.querySelector('.team2Score').classList.add("winningTeam")
-      document.querySelector('.team2 h2').textContent = `${document.querySelector('.team2 h2').textContent} YOU WIN!!!!`
+      team2ScoreText.classList.add("winningTeam")
+      team2TeamNameText.textContent = `${team2TeamNameText.textContent} YOU WIN!!!!`
       document.querySelector('.team2 h2').classList.add("winningTeam")
       disableButtonsReset()
     }
@@ -44,7 +48,7 @@ const updateScore1Sub = () =>{
   }else {
     alert("Score is already at zero.")
   }
-  document.querySelector(".team1Score").textContent = score1 
+  team1ScoreText.textContent = score1 
 }
 
 const updateScore2Sub = () =>{
@@ -53,7 +57,7 @@ const updateScore2Sub = () =>{
   }else {
     alert("Score is already at zero.")
   }
-  document.querySelector(".team2Score").textContent = score2 
+  team2ScoreText.textContent = score2 
 }
 
 // Select the class for both scores
@@ -88,7 +92,8 @@ document.querySelector(".team2 button").addEventListener('click', changeTeamName
 
 // DISABLE BUTTON-----------------------------
 const disableButtonsReset = () => {
-  //
+  document.querySelectorAll("button").disabled = true; 
+
 }
 
 // CHANGE BACKGROUND UPON SCORE INCREASE CLICK-----------------------------
