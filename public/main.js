@@ -158,7 +158,6 @@ const disableAllButtons = () =>{
   document.querySelector(".resetButton").style.visibility = "visible"
 }
 
-// const disableButtonsReset = () => {
   const resetEverything = () =>{
     //Reset Scores & Display
     score1 = 0
@@ -194,7 +193,7 @@ const disableAllButtons = () =>{
     document.querySelector(".resetButton").style.visibility = "hidden"
   }
   document.querySelector(".resetButton button").addEventListener('click', resetEverything)
-// }
+
 
 // CHANGE BACKGROUND UPON SCORE INCREASE CLICK-----------------------------
 const getRandomColor = (score) => {
