@@ -88,7 +88,61 @@ changeTeamName2 = () => {
 
 document.querySelector(".update-team-1-name").addEventListener('click', changeTeamName1)
 
-document.querySelector(".team2 button").addEventListener('click', changeTeamName2);
+document.querySelector(".team2 button").addEventListener('click', changeTeamName2)
+
+// COUNTDOWN TIMER-----------------------------
+//45m each half/quarter
+const countdownText = document.querySelector("#period-timer span")
+
+
+const oneQuarterTimeFrame = () => {
+  let initialTime = Date.now();
+  let periodCount = 0
+
+  function checkTime(){
+    let timeDifference = Date.now() - initialTime;
+    let formatted = convertTime(timeDifference);
+  }
+
+  function convertTime(miliseconds) {
+    let totalSeconds = Math.floor(miliseconds/1000);
+    let minutes = Math.floor(totalSeconds/60);
+    let seconds = totalSeconds - minutes * 60;
+ 
+ if (seconds === 5){
+        clearInterval(setInterval)
+        countdownText.textContent = "Game:End"
+      }
+    if (minutes === 45 || minutes === 90 || seconds === 30){
+      document.querySelector("#period").textContent = periodCount++
+      
+    }
+    
+    if(minutes.toString().length === 1){
+      minutes = "0"+minutes
+    }
+    if(seconds.toString().length === 1){
+      seconds = "0"+seconds
+    }
+  
+    countdownText.textContent = minutes + ':' + seconds;
+  }
+
+  window.setInterval(checkTime, 100);
+}
+
+const countdownTimer = () => {
+  countdownText.textContent = "START!"
+  oneQuarterTimeFrame()
+}
+
+document.querySelector("#gameTimeButton").addEventListener('click', countdownTimer)
+
+
+// QUARTER PERIOD COUNT-----------------------------
+// 2 period --See Above
+
+
 
 // DISABLE BUTTON-----------------------------
 // let allButtons = document.getElementsByClassName("team-1-add-1-button team-2-add-1-button team-1-subtract-1-button team-2-subtract-1-button update update-team-1-name")
@@ -116,12 +170,13 @@ const disableButtonsReset = () => {
     team2ScoreText.classList.remove("winningTeam")
 
     //Reset Period
+    document.querySelector("#period").textContent = 0
 
     //Reset Timer
+    document.querySelector("#period-timer").textContent = "00:00"
 
     //Reset Reset Button
     document.querySelector(".resetButton").style.visibility = "hidden"
-
   }
 
   document.querySelector(".resetButton").style.visibility = "visible"
@@ -139,11 +194,6 @@ const getRandomColor = (score) => {
   }else{
     color = "#06553D"
   }
-  // let letters = '0123456789ABCDEF'
-  // let color = '#'
-  // for (let i = 0; i < 6; i++) {
-  //   color += letters[Math.floor(Math.random() * 16)]
-  // }
   document.body.style.backgroundColor = color;
 }
 
