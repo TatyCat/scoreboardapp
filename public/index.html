@@ -6,44 +6,58 @@
     <title>Scoreboard</title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="stylesheet" href="/screen.css" />
+    <link href="https://fonts.googleapis.com/css?family=Graduate" rel="stylesheet"> 
   </head>
   <body>
-    <h1>My Score Board</h1>
+    <h1>Soccer Scoreboard</h1>
+    <header>
+      <h2 id="period-timer"><span>14:59</span></h2>
+    </header>
     <section class="score-area">
       <section class="team1">
-        <h2>Team 1</h2>
+        <h2>HOME</h2>
         <p class="team1Score">0</p>
       </section>
+
       <section class="team2">
-        <h2>Team 2</h2>
+        <h2>GUEST</h2>
         <p class="team2Score">0</p>
       </section>
     </section>
+          
+    <div class="resetButton">
+      <button>Reset</button>
+    </div>  
+
+    <section class="periodSection">
+      <p>Period <div id="period">2</div></p>
+    </section>
+
 
     <section class="update-score">
       <section class="team1">
         <section class="team-name">
           update team 1 name
-          <input type="text" />
+          <input type="text" placeholder="Enter Team Name..." />
           <button class="update-team-1-name">Update</button>
         </section>
         <section>
           update team 1 score
-          <button class="team-1-add-1-button">add 1</button>
-          <button class="team-1-subtract-1-button">subtract 1</button>
+          <button class="team-1-add-1-button">Add 1 pt</button>
+          <button class="team-1-subtract-1-button">Subtract 1 pt</button>
         </section>
       </section>
 
       <section class="team2">
         <section class="team-name">
           update team 2 name
-          <input type="text" />
-          <button>Update</button>
+          <input type="text" placeholder="Enter Team Name..."/>
+          <button class= "update">Update</button>
         </section>
         <section>
           update team 2 score
-          <button class="team-2-add-1-button">add 1</button>
-          <button class="team-2-subtract-1-button">subtract 1</button>
+          <button class="team-2-add-1-button">Add 1 pt</button>
+          <button class="team-2-subtract-1-button">Subtract 1 pt</button>
         </section>
       </section>
     </section>

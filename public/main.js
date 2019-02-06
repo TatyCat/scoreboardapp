@@ -14,12 +14,12 @@ let team1TeamNameText = document.querySelector('.team1 h2')
 let team2TeamNameText = document.querySelector('.team2 h2')
 
 const updateScore1Add = () =>{
-  if (score1<= 21){
+  if (score1< 2){
     score1++
-    getRandomColor()
+    getRandomColor(score1)
     team1ScoreText.textContent = score1 
 
-    if (score1 === 21){
+    if (score1 === 2){
       team1ScoreText.classList.add("winningTeam")
       team1TeamNameText.textContent = `${team1TeamNameText.textContent} YOU WIN!!!!`
       team1TeamNameText.classList.add("winningTeam")
@@ -29,14 +29,14 @@ const updateScore1Add = () =>{
 }
 
 const updateScore2Add = () =>{
-  if (score2<= 21){
+  if (score2< 21){
     score2++
-    getRandomColor()
+    getRandomColor(score2)
     team2ScoreText.textContent = score2
     if (score2 === 21){
       team2ScoreText.classList.add("winningTeam")
       team2TeamNameText.textContent = `${team2TeamNameText.textContent} YOU WIN!!!!`
-      document.querySelector('.team2 h2').classList.add("winningTeam")
+      team2TeamNameText.classList.add("winningTeam")
       disableButtonsReset()
     }
   }
@@ -79,11 +79,11 @@ document.querySelector('.team-2-subtract-1-button').addEventListener('click', up
 //display input for Team Name
 
 changeTeamName1 = () =>{
-  document.querySelector('.team1 h2').textContent = document.querySelector('.team-name input').value
+  team1TeamNameText.textContent = document.querySelector('.team-name input').value
 }
 
 changeTeamName2 = () => {
-   document.querySelector('.team2 h2').textContent = document.querySelector('.team2 input').value
+  team2TeamNameText.textContent = document.querySelector('.team2 input').value
 }
 
 document.querySelector(".update-team-1-name").addEventListener('click', changeTeamName1)
@@ -91,18 +91,59 @@ document.querySelector(".update-team-1-name").addEventListener('click', changeTe
 document.querySelector(".team2 button").addEventListener('click', changeTeamName2);
 
 // DISABLE BUTTON-----------------------------
-const disableButtonsReset = () => {
-  document.querySelectorAll("button").disabled = true; 
+// let allButtons = document.getElementsByClassName("team-1-add-1-button team-2-add-1-button team-1-subtract-1-button team-2-subtract-1-button update update-team-1-name")
+let allButtons = document.getElementsByClassName("team-1-subtract-1-button")
 
+const disableButtonsReset = () => {
+  const resetEverything = () =>{
+    //Reset Scores & Display
+    score1 = 0
+    score2 = 0 
+    team1ScoreText.textContent = score1
+    team2ScoreText.textContent = score2
+
+    //Reset Background
+    document.body.style.backgroundColor = "white";
+
+    //Reset Text & Text Styling
+    team1TeamNameText.textContent = "HOME"
+    team2TeamNameText.textContent = "Guest"
+    
+    team1TeamNameText.classList.remove("winningTeam")
+    team2TeamNameText.classList.remove("winningTeam")
+
+    team1ScoreText.classList.remove("winningTeam")
+    team2ScoreText.classList.remove("winningTeam")
+
+    //Reset Period
+
+    //Reset Timer
+
+    //Reset Reset Button
+    document.querySelector(".resetButton").style.visibility = "hidden"
+
+  }
+
+  document.querySelector(".resetButton").style.visibility = "visible"
+  document.querySelector(".resetButton button").addEventListener('click', resetEverything)
+  
+   // document.querySelector("team-1-subtract-1-button").disabled = true; 
+  // allButtons.disabled = true; 
 }
 
 // CHANGE BACKGROUND UPON SCORE INCREASE CLICK-----------------------------
-const getRandomColor = () => {
-  let letters = '0123456789ABCDEF'
-  let color = '#'
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)]
+const getRandomColor = (score) => {
+  let color
+  if (score % 2 === 0){
+    color = "#FCB60F"
+  }else{
+    color = "#06553D"
   }
+  // let letters = '0123456789ABCDEF'
+  // let color = '#'
+  // for (let i = 0; i < 6; i++) {
+  //   color += letters[Math.floor(Math.random() * 16)]
+  // }
   document.body.style.backgroundColor = color;
 }
 
