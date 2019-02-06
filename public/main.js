@@ -65,12 +65,10 @@ const updateScore2Sub = () =>{
 
 // if  add addButton, increment
 document.querySelector('.team-1-add-1-button').addEventListener('click', updateScore1Add)
-
 document.querySelector('.team-2-add-1-button').addEventListener('click', updateScore2Add)
 
 // if  add subtract Button, decrement
 document.querySelector('.team-1-subtract-1-button').addEventListener('click', updateScore1Sub)
-
 document.querySelector('.team-2-subtract-1-button').addEventListener('click', updateScore2Sub)
 
 
@@ -94,7 +92,6 @@ document.querySelector(".team2 button").addEventListener('click', changeTeamName
 //45m each half/quarter
 const countdownText = document.querySelector("#period-timer span")
 
-
 const oneQuarterTimeFrame = () => {
   let initialTime = Date.now();
   let periodCount = 0
@@ -109,13 +106,32 @@ const oneQuarterTimeFrame = () => {
     let minutes = Math.floor(totalSeconds/60);
     let seconds = totalSeconds - minutes * 60;
  
- if (seconds === 5){
-        clearInterval(setInterval)
-        countdownText.textContent = "Game:End"
+    if (minutes === 45 || minutes === 90 || seconds === 3){
+
+      // QUARTER PERIOD COUNT-----------------------------
+      // 2 periods per game 
+      if (periodCount < 2){
+        document.querySelector("#period").textContent = periodCount++
       }
-    if (minutes === 45 || minutes === 90 || seconds === 30){
-      document.querySelector("#period").textContent = periodCount++
-      
+
+      if(seconds === 4){
+        clearInterval(timerStart)
+        //if team 1 || team 2 do not have winning team class-declare winner....else/nothing
+        if (!team1ScoreText.classList.contains("winningTeam") && !team2ScoreText.classList.contains("winningTeam"))
+        {  
+          if (score1 > score2){
+            team1ScoreText.classList.add("winningTeam")
+            team1TeamNameText.textContent = `${team1TeamNameText.textContent} YOU WIN!!!!`
+            team1TeamNameText.classList.add("winningTeam")
+            disableButtonsReset()
+          }else if (score2 > score1){
+            team2ScoreText.classList.add("winningTeam")
+            team2TeamNameText.textContent = `${team2TeamNameText.textContent} YOU WIN!!!!`
+            team2TeamNameText.classList.add("winningTeam")
+            disableButtonsReset()
+          }
+        }
+      }
     }
     
     if(minutes.toString().length === 1){
@@ -128,7 +144,7 @@ const oneQuarterTimeFrame = () => {
     countdownText.textContent = minutes + ':' + seconds;
   }
 
-  window.setInterval(checkTime, 100);
+  let timerStart = window.setInterval(checkTime, 100);
 }
 
 const countdownTimer = () => {
@@ -137,11 +153,6 @@ const countdownTimer = () => {
 }
 
 document.querySelector("#gameTimeButton").addEventListener('click', countdownTimer)
-
-
-// QUARTER PERIOD COUNT-----------------------------
-// 2 period --See Above
-
 
 
 // DISABLE BUTTON-----------------------------
