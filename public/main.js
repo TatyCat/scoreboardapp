@@ -5,7 +5,6 @@
 // add or subtract score if less than 21 or greater than 0
 // change background color for every score increase
 // if 21, let user know they won
-
 let score1 = 0
 let score2 = 0
 let team1ScoreText = document.querySelector(".team1Score")
@@ -23,7 +22,7 @@ const updateScore1Add = () =>{
       team1ScoreText.classList.add("winningTeam")
       team1TeamNameText.textContent = `${team1TeamNameText.textContent} YOU WIN!!!!`
       team1TeamNameText.classList.add("winningTeam")
-      disableButtonsReset()
+      disableAllButtons()
     } 
   }
 }
@@ -37,7 +36,7 @@ const updateScore2Add = () =>{
       team2ScoreText.classList.add("winningTeam")
       team2TeamNameText.textContent = `${team2TeamNameText.textContent} YOU WIN!!!!`
       team2TeamNameText.classList.add("winningTeam")
-      disableButtonsReset()
+      disableAllButtons()
     }
   }
 }
@@ -75,7 +74,6 @@ document.querySelector('.team-2-subtract-1-button').addEventListener('click', up
 // TEAMS-----------------------------
 //if update button is pressed, capture input.
 //display input for Team Name
-
 changeTeamName1 = () =>{
   team1TeamNameText.textContent = document.querySelector('.team-name input').value
 }
@@ -107,14 +105,13 @@ const oneQuarterTimeFrame = () => {
     let seconds = totalSeconds - minutes * 60;
  
     if (minutes === 45 || minutes === 90 || seconds === 3){
-
       // QUARTER PERIOD COUNT-----------------------------
       // 2 periods per game 
       if (periodCount < 2){
         document.querySelector("#period").textContent = periodCount++
       }
 
-      if(seconds === 4){
+      if(seconds === 3){
         clearInterval(timerStart)
         //if team 1 || team 2 do not have winning team class-declare winner....else/nothing
         if (!team1ScoreText.classList.contains("winningTeam") && !team2ScoreText.classList.contains("winningTeam"))
@@ -123,12 +120,12 @@ const oneQuarterTimeFrame = () => {
             team1ScoreText.classList.add("winningTeam")
             team1TeamNameText.textContent = `${team1TeamNameText.textContent} YOU WIN!!!!`
             team1TeamNameText.classList.add("winningTeam")
-            disableButtonsReset()
+            disableAllButtons()
           }else if (score2 > score1){
             team2ScoreText.classList.add("winningTeam")
             team2TeamNameText.textContent = `${team2TeamNameText.textContent} YOU WIN!!!!`
             team2TeamNameText.classList.add("winningTeam")
-            disableButtonsReset()
+            disableAllButtons()
           }
         }
       }
@@ -140,26 +137,28 @@ const oneQuarterTimeFrame = () => {
     if(seconds.toString().length === 1){
       seconds = "0"+seconds
     }
-  
     countdownText.textContent = minutes + ':' + seconds;
   }
-
   let timerStart = window.setInterval(checkTime, 100);
 }
 
 const countdownTimer = () => {
   countdownText.textContent = "START!"
+  document.querySelector("#gameTimeButton").style.visibility = "hidden"
   oneQuarterTimeFrame()
 }
-
 document.querySelector("#gameTimeButton").addEventListener('click', countdownTimer)
 
 
 // DISABLE BUTTON-----------------------------
-// let allButtons = document.getElementsByClassName("team-1-add-1-button team-2-add-1-button team-1-subtract-1-button team-2-subtract-1-button update update-team-1-name")
-let allButtons = document.getElementsByClassName("team-1-subtract-1-button")
+let allButtons = document.querySelectorAll(".disabledButtonGameOver")
 
-const disableButtonsReset = () => {
+const disableAllButtons = () =>{
+  allButtons.disabled = true
+  document.querySelector(".resetButton").style.visibility = "visible"
+}
+
+// const disableButtonsReset = () => {
   const resetEverything = () =>{
     //Reset Scores & Display
     score1 = 0
@@ -167,12 +166,17 @@ const disableButtonsReset = () => {
     team1ScoreText.textContent = score1
     team2ScoreText.textContent = score2
 
+    //Reset Buttons 
+    allButtons.disabled = false
+    document.querySelector("#gameTimeButton").style.visibility = "visible"
+
+
     //Reset Background
-    document.body.style.backgroundColor = "white";
+    document.body.style.backgroundColor = "white"
 
     //Reset Text & Text Styling
     team1TeamNameText.textContent = "HOME"
-    team2TeamNameText.textContent = "Guest"
+    team2TeamNameText.textContent = "GUEST"
     
     team1TeamNameText.classList.remove("winningTeam")
     team2TeamNameText.classList.remove("winningTeam")
@@ -186,16 +190,11 @@ const disableButtonsReset = () => {
     //Reset Timer
     document.querySelector("#period-timer").textContent = "00:00"
 
-    //Reset Reset Button
+    //Reset the Reset Button
     document.querySelector(".resetButton").style.visibility = "hidden"
   }
-
-  document.querySelector(".resetButton").style.visibility = "visible"
   document.querySelector(".resetButton button").addEventListener('click', resetEverything)
-  
-   // document.querySelector("team-1-subtract-1-button").disabled = true; 
-  // allButtons.disabled = true; 
-}
+// }
 
 // CHANGE BACKGROUND UPON SCORE INCREASE CLICK-----------------------------
 const getRandomColor = (score) => {
@@ -205,7 +204,7 @@ const getRandomColor = (score) => {
   }else{
     color = "#06553D"
   }
-  document.body.style.backgroundColor = color;
+  document.body.style.backgroundColor = color
 }
 
 
